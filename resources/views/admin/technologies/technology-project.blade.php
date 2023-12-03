@@ -9,6 +9,7 @@
             <tr>
                 <th scope="col">ID</th>
                 <th scope="col">Tech</th>
+                <th scope="col">Project in relazione</th>
             </tr>
         </thead>
         <tbody>
@@ -20,7 +21,9 @@
                 <td>
                     <ul class="list-group">
                         @foreach ($technology->projects as $project)
-                            <li class="list-group.item">{{ $project->title}}</li>
+                            <li class="list-group.item">
+                                <a href="{{ route('admin.projects.show', $project) }}">{{ $project->title }}</a>
+                            </li>
                         @endforeach
                     </ul>
                 </td>

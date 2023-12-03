@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Technology;
 use App\Http\Requests\ProjectRequest;
 use App\Functions\Helper;
 
@@ -32,8 +33,8 @@ class ProjectController extends Controller
         $method = 'POST';
         $project = null;
         $route = route('admin.projects.store');
-
-        return view('admin.projects.create', compact ('method', 'route', 'project'));
+        $technologies = Technology::all();
+        return view('admin.projects.create', compact ('method', 'route', 'project', 'technologies'));
     }
 
     /**
@@ -68,15 +69,16 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function edit(Project $project)
     {
-
         //visto che ho fuso create e edit gli passo i valori
         $method = 'PUT';
         $route = route('admin.projects.update', $project);
+        $technologies = Technology::all();
 
-        //dentro create ho fatto anche la edit
-        return view('admin.projects.create', compact ('method', 'route'));
+        // Passa anche il $project alla vista
+        return view('admin.projects.create', compact('method', 'route', 'technologies', 'project'));
     }
 
     /**

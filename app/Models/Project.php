@@ -17,6 +17,6 @@ class Project extends Model
     }
 
     protected $fillable =[
-        'title','slug'
+        'title','slug', 'technology_id'
     ];
 }
