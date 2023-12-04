@@ -8,6 +8,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Http\Requests\ProjectRequest;
 use App\Functions\Helper;
+use App\Models\Type;
 
 class ProjectController extends Controller
 {
@@ -34,7 +35,8 @@ class ProjectController extends Controller
         $project = null;
         $route = route('admin.projects.store');
         $technologies = Technology::all();
-        return view('admin.projects.create', compact ('method', 'route', 'project', 'technologies'));
+        $types = Type::all();
+        return view('admin.projects.create', compact ('method', 'route', 'project', 'technologies', 'types'));
     }
 
     /**
@@ -50,6 +52,16 @@ class ProjectController extends Controller
         $new_project=Project::create($form_data);
 
         return redirect()->route('admin.projects.show', $new_project)->with('success', 'Progetto inserito con successo');
+
+
+        $new_project = Project::create($form_data);
+
+        if(array_key_exists('types', $form_data)){
+
+        }
+
+        return redirect()->route('admin.projects.show', $new_prject);
+
     }
 
     /**
@@ -76,9 +88,10 @@ class ProjectController extends Controller
         $method = 'PUT';
         $route = route('admin.projects.update', $project);
         $technologies = Technology::all();
+        $types = Type::all();
 
         // Passa anche il $project alla vista
-        return view('admin.projects.create', compact('method', 'route', 'technologies', 'project'));
+        return view('admin.projects.create', compact('method', 'route', 'technologies', 'project', 'type'));
     }
 
     /**
@@ -98,6 +111,13 @@ class ProjectController extends Controller
         }
 
         $project->update($form_data);
+
+        if(array_key_exists('types', $for_data)){
+            $project->types()->sync($form_data['types']);
+        }else{
+            $project->types()->detach();
+        }
+
         return redirect()->route('admin.projects.show', $project);
     }
 

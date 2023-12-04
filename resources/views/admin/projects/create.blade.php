@@ -49,6 +49,31 @@
                 </select>
             </div>
 
+            <div class="mb-3">
+                <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+
+                    @foreach ($types as $type)
+                        <input
+                        type="checkbox"
+                        class="btn-check"
+                        id="tag_{{ $type->id }}"
+                        autocomplete="off"
+                        name="types[]"
+                        value="{{ $type->id }}"
+
+                            @if ($errors->any() && in_array($type_id, old('types',[])))
+                                checked
+                            @elseif (!$errors->any() && $project->types->contains($type))
+                                checked
+                            @endif
+
+                        >
+                        <label class="btn btn-outline-primary" for="btncheck1">{{ $type->name }}</label>
+                    @endforeach
+
+                </div>
+            </div>
+
             <button type="submit" class="btn btn-primary">Invia</button>
             <button type="reset" class="btn btn-primary">Annulla</button>
 

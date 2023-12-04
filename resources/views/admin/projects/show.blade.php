@@ -8,4 +8,11 @@
     <p>Tecnologia: <strong>{{ $project->technology->name }}</strong></p>
     @endif
 
+    @forelse ($project->types as $type )
+        <span class="badge text-bg info">{{$type->name}}</span>
+    @empty
+        <span class="badge text-bg info">non ci sono type</span>
+    @endforelse
+
+
 @endsection

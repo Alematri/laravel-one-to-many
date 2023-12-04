@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Project;
+use App\Models\Type;
 
 class TypeController extends Controller
 {
@@ -14,6 +16,10 @@ class TypeController extends Controller
      */
     public function index()
     {
+        //
+    }
+
+    public function projectTypes(Type $type){
         //
     }
 

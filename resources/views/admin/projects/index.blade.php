@@ -17,6 +17,13 @@
                     <tr>
                         <td >{{ $project->title }}</td>
                         <td>{{ $project->technology->name ?? '-'}}</td>
+                        <td>
+                            @forelse ( $project->types as $type )
+                            <span class="badge text-bg-info">{{ $type->name }}</span>
+                            @empty
+                                -
+                            @endforelse
+                        </td>
                         <td><a href="{{route('admin.projects.show', $project)}}"><i class="fa-solid fa-eye"></i></a></td>
                         <td><a href="{{route('admin.projects.edit', $project)}}"><i class="fa-solid fa-pencil"></i></a></td>
 
